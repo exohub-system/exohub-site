@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EXO HUB — Free Roblox Scripts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060410;
+  --bg2: #0a0618;
+  --bg3: #120820;
+  --cyan: #00e5ff;
+  --cyan2: #00b8d4;
+  --purple: #9b59ff;
+  --text: #c8d8ff;
+  --muted: #4a5580;
+  --border: rgba(0,229,255,0.12);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Rajdhani',sans-serif;
+  overflow-x:hidden; cursor:crosshair; min-height:100vh;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.012) 2px,rgba(0,229,255,0.012) 4px);
+  pointer-events:none; z-index:999;
+}
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 48px;
+  background:rgba(6,4,16,0.92); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:5px; color:#fff; text-decoration:none; }
+.nav-logo span { color:var(--cyan); }
+.nav-right { display:flex; align-items:center; gap:24px; }
+.nav-link { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-link:hover { color:var(--cyan); }
+.nav-discord {
+  font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:2px;
+  color:#000; background:var(--cyan); padding:8px 20px; text-decoration:none;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  font-weight:700; transition:background 0.2s;
+}
+.nav-discord:hover { background:#33eeff; }
+.hero {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:120px 24px 80px;
+  position:relative; overflow:hidden;
+}
+.hero-grid {
+  position:absolute; inset:0;
+  background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+.hero-glow {
+  position:absolute; width:700px; height:700px; border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,0.07) 0%,rgba(155,89,255,0.05) 40%,transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  animation:breathe 5s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.08)} }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(0,229,255,0.25); padding:6px 18px; margin-bottom:28px;
+  animation:fadeUp 0.5s ease both;
+}
+.badge-dot { width:6px; height:6px; border-radius:50%; background:var(--cyan); animation:blink 1.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.badge-text { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:3px; color:var(--cyan); }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(90px,18vw,200px); line-height:0.88; letter-spacing:10px; animation:fadeUp 0.5s 0.1s ease both; }
+.hero-title .t1 { display:block; -webkit-text-stroke:2px var(--cyan); color:transparent; }
+.hero-title .t2 { display:block; color:#fff; text-shadow:0 0 80px rgba(0,229,255,0.3); }
+.hero-sub { font-size:16px; font-weight:600; letter-spacing:4px; color:var(--muted); text-transform:uppercase; margin-top:16px; animation:fadeUp 0.5s 0.2s ease both; }
+.hero-sub span { color:var(--cyan); }
+.hero-btns { display:flex; gap:14px; margin-top:48px; animation:fadeUp 0.5s 0.3s ease both; flex-wrap:wrap; justify-content:center; }
+.btn-primary { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:3px; color:#000; background:var(--cyan); padding:13px 38px; text-decoration:none; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:all 0.2s; box-shadow:0 0 40px rgba(0,229,255,0.25); }
+.btn-primary:hover { background:#33eeff; box-shadow:0 0 60px rgba(0,229,255,0.45); }
+.btn-outline { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:3px; color:var(--cyan); background:transparent; padding:13px 38px; text-decoration:none; border:1px solid rgba(0,229,255,0.35); clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:all 0.2s; }
+.btn-outline:hover { background:rgba(0,229,255,0.08); border-color:var(--cyan); }
+.hero-stats { display:flex; gap:56px; margin-top:64px; animation:fadeUp 0.5s 0.4s ease both; flex-wrap:wrap; justify-content:center; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:40px; color:#fff; line-height:1; }
+.stat-num em { color:var(--cyan); font-style:normal; }
+.stat-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--muted); margin-top:4px; }
+.stat-div { width:1px; background:rgba(0,229,255,0.15); align-self:stretch; }
+.marquee-wrap { overflow:hidden; background:rgba(0,229,255,0.06); border-top:1px solid rgba(0,229,255,0.12); border-bottom:1px solid rgba(0,229,255,0.12); padding:10px 0; }
+.marquee-inner { display:inline-block; white-space:nowrap; animation:marquee 25s linear infinite; font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:4px; color:rgba(0,229,255,0.5); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.section { padding:90px 48px; max-width:1200px; margin:0 auto; }
+.section-tag { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:4px; color:var(--cyan); margin-bottom:10px; }
+.section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,6vw,68px); letter-spacing:4px; color:#fff; line-height:1; margin-bottom:50px; }
+.section-title span { -webkit-text-stroke:1px var(--cyan); color:transparent; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:2px; }
+.card { background:var(--bg2); border:1px solid var(--border); padding:28px; position:relative; overflow:hidden; transition:all 0.3s; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); transform:translateX(-100%); transition:transform 0.4s; }
+.card:hover::before { transform:translateX(0); }
+.card:hover { border-color:rgba(0,229,255,0.3); transform:translateY(-3px); box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 30px rgba(0,229,255,0.06); background:var(--bg3); }
+.card-icon { font-size:28px; margin-bottom:14px; display:block; }
+.card-game { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--cyan); text-transform:uppercase; margin-bottom:6px; }
+.card-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:#fff; margin-bottom:10px; line-height:1; }
+.card-desc { font-size:13px; font-weight:500; color:var(--muted); line-height:1.65; margin-bottom:18px; }
+.card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px; }
+.tag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--cyan); border:1px solid rgba(0,229,255,0.25); padding:3px 8px; text-transform:uppercase; }
+.copy-btn {
+  width:100%; font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:3px;
+  color:#000; background:var(--cyan); border:none; padding:11px 0; cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:all 0.2s; box-shadow:0 0 20px rgba(0,229,255,0.2);
+}
+.copy-btn:hover { background:#33eeff; box-shadow:0 0 40px rgba(0,229,255,0.35); }
+.copy-btn.copied { background:#00ff88; color:#000; box-shadow:0 0 40px rgba(0,255,136,0.35); }
+.card.featured { grid-column:span 2; background:linear-gradient(135deg,var(--bg3) 0%,var(--bg2) 100%); border-color:rgba(0,229,255,0.2); }
+.featured-inner { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; margin-bottom:20px; }
+.feat-list { list-style:none; display:flex; flex-direction:column; gap:9px; margin-top:4px; }
+.feat-list li { font-size:13px; font-weight:600; color:var(--muted); display:flex; align-items:center; gap:8px; }
+.feat-list li::before { content:'▸'; color:var(--cyan); font-size:10px; }
+.feat-list li span { color:var(--text); }
+.card-corner { position:absolute; bottom:14px; right:14px; width:16px; height:16px; border-right:2px solid rgba(0,229,255,0.2); border-bottom:2px solid rgba(0,229,255,0.2); }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(0,229,255,0.2),transparent); }
+footer { padding:56px 48px; text-align:center; border-top:1px solid var(--border); }
+.footer-logo { font-family:'Bebas Neue',sans-serif; font-size:44px; letter-spacing:8px; color:#fff; margin-bottom:6px; }
+.footer-logo span { color:var(--cyan); }
+.footer-link { font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:3px; color:var(--cyan); text-decoration:none; transition:color 0.2s; }
+.footer-link:hover { color:#fff; }
+.footer-copy { margin-top:28px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--muted); opacity:0.5; }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.55s ease,transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+#cursor-glow { position:fixed; width:280px; height:280px; border-radius:50%; background:radial-gradient(circle,rgba(0,229,255,0.04) 0%,transparent 70%); pointer-events:none; z-index:998; transform:translate(-50%,-50%); transition:left 0.12s ease,top 0.12s ease; }
+@media(max-width:768px){
+  nav{padding:14px 20px;} .section{padding:60px 20px;}
+  .grid{grid-template-columns:1fr;} .card.featured{grid-column:span 1;}
+  .featured-inner{grid-template-columns:1fr;} .hero-stats{gap:28px;}
+}
+</style>
+</head>
+<body>
+<div id="cursor-glow"></div>
+<nav>
+  <a href="#" class="nav-logo">EXO<span>HUB</span></a>
+  <div class="nav-right">
+    <a href="#scripts" class="nav-link">SCRIPTS</a>
+    <a href="https://discord.gg/6QzV9pTWs" class="nav-discord" target="_blank">JOIN DISCORD</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="badge-dot"></div><span class="badge-text">Delta Executor Ready</span></div>
+  <h1 class="hero-title"><span class="t1">EXO</span><span class="t2">HUB</span></h1>
+  <p class="hero-sub">The <span>cleanest</span> free Roblox hub</p>
+  <div class="hero-btns">
+    <a href="#scripts" class="btn-primary">GET SCRIPTS</a>
+    <a href="https://discord.gg/6QzV9pTWs" class="btn-outline" target="_blank">discord.gg/6QzV9pTWs</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">5<em>+</em></div><div class="stat-label">Scripts</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num"><em>100</em>%</div><div class="stat-label">Free Forever</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num"><em>∞</em></div><div class="stat-label">Updates</div></div>
+  </div>
+</div>
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    &nbsp;&nbsp; EXO HUB &nbsp;/&nbsp; MM2 HUB &nbsp;/&nbsp; GOD MODE &nbsp;/&nbsp; SILENT AIM &nbsp;/&nbsp; FLY + NOCLIP &nbsp;/&nbsp; SERVER HOP &nbsp;/&nbsp; DELTA READY &nbsp;/&nbsp; FREE FOREVER &nbsp;/&nbsp;
+    &nbsp;&nbsp; EXO HUB &nbsp;/&nbsp; MM2 HUB &nbsp;/&nbsp; GOD MODE &nbsp;/&nbsp; SILENT AIM &nbsp;/&nbsp; FLY + NOCLIP &nbsp;/&nbsp; SERVER HOP &nbsp;/&nbsp; DELTA READY &nbsp;/&nbsp; FREE FOREVER &nbsp;/&nbsp;
+  </div>
+</div>
+<div class="divider"></div>
+<div class="section" id="scripts">
+  <p class="section-tag reveal">// script_library</p>
+  <h2 class="section-title reveal">GET THE <span>SCRIPTS</span></h2>
+  <div class="grid" id="scripts-grid"></div>
+</div>
+<div class="divider"></div>
+<footer>
+  <div class="footer-logo">EXO<span>HUB</span></div>
+  <a href="https://discord.gg/6QzV9pTWs" class="footer-link" target="_blank">discord.gg/6QzV9pTWs</a>
+  <p class="footer-copy">© 2025 EXO HUB — Free forever. Always updating.</p>
+</footer>
+<script>
+const SCRIPTS = {
+  mm2hub: {
+    icon: "🔪", title: "MM2 HUB", game: "Murder Mystery 2",
+    desc: "The ultimate MM2 script. ESP, auto kill sheriff, auto shoot murderer.",
+    tags: ["ESP","Kill Sheriff","Shoot Murderer","Delta Ready"],
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/exohub-system/MM2/refs/heads/main/EXOHUB"))()`
+  },
+  silentaim: {
+    icon: "🎯", title: "SILENT AIM", game: "Rivals",
+    desc: "Head-only silent aim. FOV circle, team check, wall check. Undetectable.",
+    tags: ["Head Only","FOV Circle","Team Check","Wall Check"],
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/exohub-system/aimbot/refs/heads/main/EXOHUB"))()`
+  },
+  godmode: {
+    icon: "🛡️", title: "GOD MODE", game: "All Games",
+    desc: "Four layers of protection. Health lock, anti ragdoll, anti knockback, anti void.",
+    tags: ["Anti Die","Anti Ragdoll","Anti Knockback","Anti Void"],
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/exohub-system/godmode/refs/heads/main/godmode"))()`
+  },
+  flynoclip: {
+    icon: "✈️", title: "FLY + NOCLIP", game: "All Games",
+    desc: "Smooth fly with speed control and noclip. Go anywhere, through anything.",
+    tags: ["Fly","NoClip","Speed Slider"],
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/exohub-system/fly/refs/heads/main/fly_noclip"))()`
+  },
+  serverhop: {
+    icon: "🔄", title: "SERVER HOP", game: "All Games",
+    desc: "Instantly hop to a random server. Filters ghost servers, sorts by player count.",
+    tags: ["Anti Ghost","Random Hop","Player Filter"],
+    code: `-- // EXO HUB | Server Hop
+-- // discord.gg/6QzV9pTWs
+
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local lp = Players.LocalPlayer
+
+if lp.PlayerGui:FindFirstChild("ExoHopUI") then
+    lp.PlayerGui.ExoHopUI:Destroy()
+end
+
+local SG = Instance.new("ScreenGui")
+SG.Name = "ExoHopUI"
+SG.ResetOnSpawn = false
+SG.DisplayOrder = 999
+SG.IgnoreGuiInset = true
+SG.Parent = lp.PlayerGui
+
+local btn = Instance.new("TextButton")
+btn.Size = UDim2.new(0, 70, 0, 34)
+btn.Position = UDim2.new(0.5, -35, 0, 60)
+btn.BackgroundColor3 = Color3.fromRGB(6, 6, 14)
+btn.Text = "⚡ Hop"
+btn.TextColor3 = Color3.fromRGB(0, 210, 255)
+btn.Font = Enum.Font.GothamBold
+btn.TextSize = 14
+btn.BorderSizePixel = 0
+btn.Active = true
+btn.Parent = SG
+Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(0, 200, 255)
+stroke.Thickness = 1.5
+stroke.Parent = btn
+
+-- Dragging
+local dragging = false
+local wasDragged = false
+local dragStart, startPos
+
+btn.InputBegan:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        wasDragged = false
+        dragStart = i.Position
+        startPos = btn.Position
+    end
+end)
+
+btn.InputEnded:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(i)
+    if dragging and i.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = i.Position - dragStart
+        if math.abs(delta.X) > 4 or math.abs(delta.Y) > 4 then
+            wasDragged = true
+        end
+        btn.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- Hover FX
+btn.MouseEnter:Connect(function() btn.BackgroundColor3 = Color3.fromRGB(0, 40, 70) end)
+btn.MouseLeave:Connect(function() btn.BackgroundColor3 = Color3.fromRGB(6, 6, 14) end)
+
+-- Server Hop
+btn.MouseButton1Click:Connect(function()
+    if wasDragged then wasDragged = false return end
+    btn.Text = "..."
+    btn.TextColor3 = Color3.fromRGB(180, 180, 180)
+
+    local placeId = game.PlaceId
+    local currentJob = game.JobId
+
+    local ok, servers = pcall(function()
+        return game:GetService("HttpService"):JSONDecode(
+            game:GetService("HttpService"):GetAsync(
+                "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Desc&limit=100"
+            )
+        )
+    end)
+
+    if ok and servers and servers.data then
+        -- collect all valid servers (not current, not full, not empty)
+        local valid = {}
+        for _, s in ipairs(servers.data) do
+            if s.id ~= currentJob and s.playing > 0 and s.playing < s.maxPlayers then
+                table.insert(valid, s)
+            end
+        end
+
+        if #valid > 0 then
+            -- pick RANDOM so it never keeps landing on same server
+            local pick = valid[math.random(1, #valid)]
+            TeleportService:TeleportToPlaceInstance(placeId, pick.id, lp)
+            return
+        end
+    end
+
+    -- fallback: fresh server
+    TeleportService:Teleport(placeId, lp)
+end)
+`
+  },
+};
+const CARDS = [
+  {
+    key:"mm2hub", featured:true,
+    extraFeatures:[
+      ["👁 ESP","See Murderer, Sheriff & Innocents through walls"],
+      ["🔪 Kill Sheriff","Auto stab when you're the murderer"],
+      ["⭐ Shoot Murderer","Auto aim & shoot when you're the sheriff"],
+      ["🎨 Role Colors","Red murderer, Blue sheriff, Green innocent"],
+      ["⚡ Hold to Activate","Full control over when it fires"]
+    ]
+  },
+  {key:"godmode"},
+  {key:"silentaim"},
+  {key:"flynoclip"},
+  {key:"serverhop"},
+];
+
+function makeTags(tags){ return tags.map(t=>`<span class="tag">${t}</span>`).join(''); }
+
+function makeCard(cfg){
+  const s = SCRIPTS[cfg.key];
+  if(!s) return '';
+  const id = `copy-${cfg.key}`;
+  if(cfg.featured){
+    const feats = cfg.extraFeatures.map(([t,d])=>`<li><span>${t}</span> — ${d}</li>`).join('');
+    return `<div class="card featured reveal">
+      <div class="featured-inner">
+        <div>
+          <span class="card-icon">${s.icon}</span>
+          <p class="card-game">${s.game}</p>
+          <h3 class="card-title">${s.title}</h3>
+          <p class="card-desc">${s.desc}</p>
+          <div class="card-tags">${makeTags(s.tags)}</div>
+        </div>
+        <ul class="feat-list">${feats}</ul>
+      </div>
+      <button class="copy-btn" id="${id}" onclick="copyScript('${cfg.key}','${id}')">COPY SCRIPT</button>
+      <div class="card-corner"></div>
+    </div>`;
+  }
+  return `<div class="card reveal">
+    <span class="card-icon">${s.icon}</span>
+    <p class="card-game">${s.game}</p>
+    <h3 class="card-title">${s.title}</h3>
+    <p class="card-desc">${s.desc}</p>
+    <div class="card-tags">${makeTags(s.tags)}</div>
+    <button class="copy-btn" id="${id}" onclick="copyScript('${cfg.key}','${id}')">COPY SCRIPT</button>
+    <div class="card-corner"></div>
+  </div>`;
+}
+
+document.getElementById('scripts-grid').innerHTML = CARDS.map(makeCard).join('');
+
+function copyScript(key, btnId){
+  const code = SCRIPTS[key].code;
+  const btn = document.getElementById(btnId);
+  navigator.clipboard.writeText(code).then(()=>{
+    btn.textContent = "✓ COPIED!";
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent="COPY SCRIPT"; btn.classList.remove('copied'); }, 2000);
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = code; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = "✓ COPIED!";
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent="COPY SCRIPT"; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*70); });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const glow = document.getElementById('cursor-glow');
+document.addEventListener('mousemove',e=>{ glow.style.left=e.clientX+'px'; glow.style.top=e.clientY+'px'; });
+</script>
+</body>
+</html>
